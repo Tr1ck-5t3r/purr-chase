@@ -9,11 +9,11 @@ function Navbar() {
           <Link to="/">
             <div className='flex'>
               <div className="text-orange-500 ml-7 text-3xl font-extrabold font-Belanosima hover:drop-shadow-custom1">Purr-chase</div>
-              <img className="ml-4 w-10 h-10" src={titleimg} alt="titleimg hover:drop-shadow-custom1" />
+              <img className="ml-4 w-10 h-10" src={titleimg} alt="titleimg hover:drop-shadow-custom" />
             </div>
           </Link>
           <div>
-            <ul className=" text-orange-500 text-base font-Quicksand flex space-x-10  ">
+            <ul className=" text-slate-300 text-base font-Quicksand flex space-x-10  ">
               <li className="font-extrabold hover:text-gray-300 hover:drop-shadow-custom">
                 <Link to="/">Home</Link>
               </li>
@@ -32,7 +32,7 @@ function Navbar() {
             </ul>
           </div>
           <div>
-            <button className=" hover:drop-shadow-custom1 font-black hover:font-black  font-Quicksand bg-slate-600 mr-7 text-orange-500 py-1 px-4 rounded-full hover:bg-gray-100 hover:text-orange-500">Login</button>
+            <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-full hover:bg-gray-300 hover:text-orange-500">Login</button>
           </div>
           
       </nav>

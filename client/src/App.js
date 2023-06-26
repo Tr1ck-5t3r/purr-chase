@@ -8,6 +8,7 @@ import Find from './Components/Find';
 import Error from './Components/Error';
 import Gallery from './Components/Gallery';
 import Services from './Components/Services';
+import Footer from './Components/Footer';
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,9 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <div>
+        <Footer/>
+      </div>
     </div>
   );
 }
