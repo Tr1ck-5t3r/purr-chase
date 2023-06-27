@@ -56,37 +56,74 @@ function Home() {
             <br/>
             <br/>
         </div>
-        <div className=' bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 flex justify-center '>
-            <div className='p-4 flex justify-evenly  w-10/12 backdrop-blur-sm bg-slate-400 rounded-3xl bg-opacity-10 '>
+        <div className=' bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 flex justify-center '>
+            <div className=' m-6 flex justify-evenly w-10/12 backdrop-blur-sm bg-slate-400 rounded-3xl bg-opacity-10 '>
                 <div className=' w-2/5 rounded-l-3xl hover:bg-slate-300 hover:bg-opacity-10 px-4 py-4 text-slate-300 font-MavenPro '>
-                    <span className=' text-center hover:cursor-pointer py-1 bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size] text-xl '>Gallery</span><br/>
-                    <br/>
-                    Check out our Well fed pets
-                    <br/>
-                    <img className=" w-56 ml-10 h-auto " src={gallery} alt='gallery'/>
-                    <br/>
-                    <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">Gallery</button>
+                    <div className=' px-8 py-3'>
+                        <span className=' text-center hover:cursor-pointer py-1 bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size] text-xl '>
+                            <Link to="/gallery">
+                            Gallery
+                            </Link>
+                        </span>
+                        <br/>
+                        <br/>
+                        Check out our Well fed pets
+                        <br/>
+                        <div className=' flex justify-center '>
+                            <img className=" w-56 h-auto " src={gallery} alt='gallery'/>
+                        </div>
+                        <br/>
+                        <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">
+                            <Link to="/gallery">
+                            Gallery
+                            </Link>
+                        </button>
+                    </div>
                 </div>
-                <div className="h-[250px] min-h-[1em] w-[3px] self-stretch bg-gradient-to-b from-transparent via-neutral-500 to-transparent opacity-20 dark:opacity-100"></div>
+                <div className="mt-8 h-[350px] min-h-[1em] w-[3px] self-stretch bg-gradient-to-b from-transparent via-neutral-500 to-transparent opacity-20 dark:opacity-100"></div>
                 <div className=' w-2/5 hover:bg-slate-300 hover:bg-opacity-10 px-4 py-4 text-slate-300 font-MavenPro '>
-                    <span className=' text-center hover:cursor-pointer py-1 bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size] text-xl '>Learn more</span><br/>
-                    <br/>
-                    Find out more about us
-                    <br/>
-                    <img className=" w-56 ml-10 h-auto " src={learn} alt='learn'/>
-                    <br/>
-                    <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">Learn more</button>
+                    <div className=' px-8 py-3'>
+                        <span className=' text-center hover:cursor-pointer py-1 bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size] text-xl '>
+                            <Link to="/about">
+                            Learn more
+                            </Link>
+                        </span><br/>
+                        <br/>
+                        Find out more about us
+                        <br/>
+                        <div className=' flex justify-center '>
+                            <img className=" w-56 h-auto " src={learn} alt='learn'/>
+                        </div>
+                        <br/>
+                        <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">
+                            
+                            <Link to="/about">
+                            About Us
+                            </Link>
+                        </button>
+                    </div>
                 </div>
-                <div className="h-[250px] min-h-[1em] w-[3px] self-stretch bg-gradient-to-b  from-transparent via-neutral-500 to-transparent opacity-20 dark:opacity-100"></div>
+                <div className="mt-8 h-[350px] min-h-[1em] w-[3px] self-stretch bg-gradient-to-b  from-transparent via-neutral-500 to-transparent opacity-20 dark:opacity-100"></div>
                 <div className=' w-2/5 rounded-r-3xl hover:bg-slate-300 hover:bg-opacity-10 px-4 py-4 text-slate-300 font-MavenPro '>
-                    <span className=' text-center hover:cursor-pointer py-1 bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size] text-xl '>Need help?</span><br/>
-                    <br/>
-                    Check out the services we offer
-                    <br/>
-                    <img className=" w-56 ml-10 h-auto " src={help} alt='help'/>
-                    <br/>
-                    <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">Services</button> 
-
+                    <div className=' px-8 py-3'>
+                        <span className=' text-center hover:cursor-pointer py-1 bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size] text-xl '>
+                            <Link to="/services">
+                                Need help?
+                            </Link>
+                        </span><br/>
+                        <br/>
+                        Check out the services we offer
+                        <br/>
+                        <div className=' flex justify-center '>
+                            <img className=" w-56 h-auto " src={help} alt='help'/>
+                        </div>
+                        <br/>
+                        <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">
+                            <Link to="/services">
+                                Services
+                            </Link>
+                        </button> 
+                    </div>
                 </div >
             </div>
         </div>
