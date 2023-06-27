@@ -5,7 +5,7 @@ import titleimg from '../Assets/titleimg.png'
 function Navbar() {
   return (
     <div className="">
-      <nav className="bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-slate-800 py-4 px-6 flex items-center justify-between ">
+      <nav className="bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 py-4 px-6 flex items-center justify-between ">
           <Link to="/">
             <div className='flex'>
               <div className="text-orange-500 ml-7 text-3xl font-extrabold font-Belanosima hover:drop-shadow-custom1">Purr-chase</div>
@@ -32,7 +32,7 @@ function Navbar() {
             </ul>
           </div>
           <div>
-            <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-full hover:bg-gray-300 hover:text-orange-500">Login</button>
+            <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">Login</button>
           </div>
           
       </nav>
