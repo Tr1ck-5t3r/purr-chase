@@ -1,5 +1,5 @@
 import React from 'react'
-import articleimg from '../Assets/articleimg.png'
+import articleimgfour from '../Assets/articleimgfour.png'
 import pawpatterntwoc from '../Assets/pawpatterntwoc.png'
 import pawpatterntwo from '../Assets/pawpatterntwo.png'
 import { Link } from 'react-router-dom'
@@ -22,11 +22,11 @@ function Home() {
                     <img className=" w-[18rem] opacity-70 h-auto absolute -bottom-24 right-32 -rotate-[45deg] "  
                     src={pawpatterntwo} alt='pawpatterntwo'/>
 
-                    <article className=' px-12 py-10  w-8/12 backdrop-blur-sm bg-slate-400 rounded-3xl bg-opacity-10 '>
+                    <article className=' hover:drop-shadow-custom2 px-12 py-10  w-8/12 backdrop-blur-sm bg-slate-400 rounded-3xl bg-opacity-10 '>
                         
                         <div className='  text-slate-300 flex text-justify  justify-evenly px-12 py-10'>
                             
-                            <div className='pt-6'>
+                            <div className='pt-3'>
                                 <h2 className=' font-MavenPro text-3xl py-4 '>
                                     Wanna become a
                                     <Link to="/find">
@@ -41,10 +41,16 @@ function Home() {
                                     Wanna spend your time with these best buddies?
                                     Find your perfect match now!.
                                 </h4>
+                                <br/>
+                                <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">
+                                    <Link to="/find">
+                                    Find now
+                                    </Link>
+                                </button>
                             </div>
 
                             <div>
-                                <img src={articleimg} alt="articleimg" />
+                                <img src={articleimgfour} alt="articleimgfour" />
                             </div>
 
                         </div>
@@ -125,6 +131,12 @@ function Home() {
                         </button> 
                     </div>
                 </div >
+            </div>
+        </div>
+        <div className=' text-white bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 flex justify-center '>
+            resister rescued pets
+            <div className=' m-6 flex justify-evenly w-10/12 backdrop-blur-sm bg-slate-400 rounded-3xl bg-opacity-10 '>
+            
             </div>
         </div>
     </div>

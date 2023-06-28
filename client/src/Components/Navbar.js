@@ -8,7 +8,7 @@ function Navbar() {
       <nav className="bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 py-4 px-6 flex items-center justify-between ">
           <Link to="/">
             <div className='flex'>
-              <div className="text-orange-500 ml-7 text-3xl font-extrabold font-Belanosima hover:drop-shadow-custom1">Purr-chase</div>
+              <div className="ml-4 text-3xl font-Belanosima text-center font-bold bg-gradient-to-r from-rose-600 to-orange-500 bg-clip-text text-transparent">Purr-chase</div>
               <img className="ml-4 w-10 h-10" src={titleimg} alt="titleimg hover:drop-shadow-custom" />
             </div>
           </Link>
