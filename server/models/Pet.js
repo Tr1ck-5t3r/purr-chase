@@ -7,7 +7,10 @@ const PetSchema = new Schema({
     type: String,
     breed: String,
     description: String,
-    avatar: File
+    avatar: {
+        data: Buffer,
+        contentType: String
+    }
 });
 
 module.exports = mongoose.model('Pet', PetSchema);
