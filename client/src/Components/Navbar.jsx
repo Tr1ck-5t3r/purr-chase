@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+
 
 function Navbar() {
   return (
-    <div className="">
+    <div className=" mt-0 fixed w-full z-10 top-0">
       <nav className="bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 py-4 px-6 flex items-center justify-between ">
           <Link to="/">
             <div className='flex'>
@@ -29,11 +31,14 @@ function Navbar() {
             </ul>
           </div>
           <div>
-            <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">
-              <Link to="/login">
-                Login
-              </Link>
-            </button>
+            <SignedOut>
+              <button className=" hover:drop-shadow-custom font-black hover:font-black  font-Quicksand bg-slate-300 mr-7 text-orange-700 py-1 px-4 rounded-xl hover:bg-gray-300 hover:text-orange-500">
+                <SignInButton />
+              </button>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
           
       </nav>
