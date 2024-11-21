@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import ImageCloud from "./ImageCloud";
 
 const petData = {
     "pets": [
       {
         "name": "Bella",
-        "src": "https://example.com/bella.jpg",
+        "src": "articleimg_qt6wwb.png",
         "description": "Bella is a friendly and playful dog who loves long walks and belly rubs.",
         "type": "dog",
         "breed": "Labrador Retriever",
@@ -14,7 +15,7 @@ const petData = {
       },
       {
         "name": "Max",
-        "src": "https://example.com/max.jpg",
+        "src": "articleimg_qt6wwb.png",
         "description": "Max is a calm and gentle cat who enjoys lounging in sunny spots and being brushed.",
         "type": "cat",
         "breed": "Domestic Shorthair",
@@ -24,7 +25,7 @@ const petData = {
       },
       {
         "name": "Charlie",
-        "src": "https://example.com/charlie.jpg",
+        "src": "articleimg_qt6wwb.png",
         "description": "Charlie is an energetic and affectionate puppy who loves to play fetch and cuddle.",
         "type": "dog",
         "breed": "Golden Retriever",
@@ -34,7 +35,7 @@ const petData = {
       },
       {
         "name": "Luna",
-        "src": "https://example.com/luna.jpg",
+        "src": "articleimg_qt6wwb.png",
         "description": "Luna is a curious and independent cat who enjoys exploring her surroundings and lounging in high places.",
         "type": "cat",
         "breed": "Siamese",
@@ -44,7 +45,7 @@ const petData = {
       },
       {
         "name": "Rocky",
-        "src": "https://example.com/rocky.jpg",
+        "src": "articleimg_qt6wwb.png",
         "description": "Rocky is a loyal and protective dog who loves going for hikes and playing fetch.",
         "type": "dog",
         "breed": "German Shepherd",
@@ -54,7 +55,7 @@ const petData = {
       },
       {
         "name": "Milo",
-        "src": "https://example.com/milo.jpg",
+        "src": "articleimg_qt6wwb.png",
         "description": "Milo is a sweet and affectionate cat who enjoys cuddling on laps and chasing laser pointers.",
         "type": "cat",
         "breed": "Maine Coon",
@@ -64,7 +65,7 @@ const petData = {
       },
       {
         "name": "Daisy",
-        "src": "https://example.com/daisy.jpg",
+        "src": "articleimg_qt6wwb.png",
         "description": "Daisy is a playful and curious puppy who loves meeting new people and exploring the outdoors.",
         "type": "dog",
         "breed": "Labradoodle",
@@ -74,7 +75,7 @@ const petData = {
       },
       {
         "name": "Simba",
-        "src": "https://example.com/simba.jpg",
+        "src": "articleimg_qt6wwb.png",
         "description": "Simba is a regal and independent cat who enjoys lounging in sunbeams and watching birds from the window.",
         "type": "cat",
         "breed": "Persian",
@@ -164,13 +165,15 @@ function Find() {
         </form>
 
       </div>
-      <div className='my-10 w-11/12 px-6 py-16 bg-zinc-900 rounded-xl '>
+      <div className='my-10 w-11/12 px-6 py-16 '>
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
               {petData["pets"].map((image, index) => (
                 <div className="group" key={index}>
                   <div className="bg-zinc-800 bg-opacity-30 shadow-lg rounded-xl hover:bg-zinc-700 hover:bg-opacity-55">
-                    <div className="h-40 bg-contain" style={{ backgroundImage: `url(${image.src})` }}></div>
+                    <div className="h-40 bg-contain">
+                      <ImageCloud src={image.src}/>
+                    </div>
                     <div className="px-6 py-4">
                       <h3 className="text-xl font-semibold text-white mb-2">Gallery Title</h3>
                       <p className="text-gray-500 text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies efficitur lacus.</p>

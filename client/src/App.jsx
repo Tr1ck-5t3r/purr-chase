@@ -11,19 +11,13 @@ import Dashboard from './Components/Dashboard';
 import Activity from './Components/Activity';
 import Current from './Components/Current';
 import Editprofile from './Components/Editprofile';
-import { isSignedIn,useUser } from '@clerk/clerk-react'
+import {useUser } from '@clerk/clerk-react'
 import { useState } from 'react';
-import { AppContext } from '../context/AppContext';
+import { AppContext } from './Context/AppContext'
 
 function App() {
   const { isSignedIn, user } = useUser();
   const [authState, setAuthState]  = useState(false);
-  if (isSignedIn){
-    setAuthState(true);
-  }
-  else{
-    
-  }
   return (
     <div className="App">
       <div>
@@ -38,7 +32,7 @@ function App() {
         <Route path="/activity" element={<Activity />} />
         <Route path="/current" element={<Current />} />
         <Route path="/edit_profile" element={<Editprofile />} />
-        <Route path="*" element={<Error />} />
+        <Route path="" element={<Error />} />
       </Routes>
       <div>
         <Footer/>
