@@ -25,9 +25,6 @@ function Navbar() {
               <li className=" font-medium hover:text-gray-300 hover:drop-shadow-custom">
                 <Link to="/Gallery">Gallery</Link>
               </li>
-              <li className=" font-medium hover:text-gray-300 hover:drop-shadow-custom">
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
             </ul>
           </div>
           <div>

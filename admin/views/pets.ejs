@@ -1,0 +1,17 @@
+<h2>Manage Pets</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Species</th>
+    <th>Actions</th>
+  </tr>
+  <% pets.forEach(pet => { %>
+    <tr>
+      <td><%= pet.name %></td>
+      <td><%= pet.species %></td>
+      <td>
+        <a href="/delete-pet/<%= pet._id %>">Delete</a>
+      </td>
+    </tr>
+  <% }) %>
+</table>

@@ -1,16 +1,19 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose");
 
-const PetSchema = new Schema({
-    name: String,
-    age: Number,
+const petSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  breed: { type: String, required: true },
+  species: {
     type: String,
-    breed: String,
-    description: String,
-    avatar: {
-        data: Buffer,
-        contentType: String
-    }
+    enum: ["dog", "cat", "bird", "fish", "other"],
+    required: true,
+  },
+  age: { type: Number, required: true },
+  price: { type: Number, required: true },
+  description: { type: String },
+  images: [{ type: String }], // Array of image URLs
+  available: { type: Boolean, default: true },
+  createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Pet', PetSchema);
+module.exports = mongoose.model("Pet", petSchema);

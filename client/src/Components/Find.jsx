@@ -116,7 +116,7 @@ function Find() {
   
   return (
     <div className="text-slate-300 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 flex-col justify-center align-middle ">
-      <div className="my-8 p-7 w-11/12 rounded-xl  bg-zinc-900">
+      <div className="my-8 p-7 w-11/12 rounded-xl bg-zinc-900">
         <h2 className='font-medium font-MavenPro text-3xl  '>
           Lets find your 
           <span className="mx-2 hover:cursor-pointer bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size]">

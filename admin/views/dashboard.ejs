@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("/check-auth")
+          .then(response => response.json())
+          .then(data => {
+            if (!data.authenticated) {
+              sessionStorage.removeItem("user");
+              window.location.href = "/"; // Redirect if not authenticated
+            } else {
+              sessionStorage.setItem("user", data.username);
+              document.getElementById("user").innerText = data.username;
+            }
+          })
+          .catch(() => {
+            sessionStorage.removeItem("user");
+            window.location.href = "/";
+          });
+      });
+
+      function logout() {
+        sessionStorage.removeItem("user"); // Clear session storage
+        fetch("/logout", { method: "GET" })
+          .then(() => window.location.href = "/"); // Redirect after logout
+      }
+    </script>
+</head>
+<body>
+    <h2>Welcome, <span id="user"></span>!</h2>
+    <button onclick="logout()">Logout</button>
+
+    <h3>Dashboard Overview</h3>
+    <p>Total Users: <%= totalUsers %></p>
+    <p>Total Pets: <%= totalPets %></p>
+    <p>Total Orders: <%= totalOrders %></p>
+
+    <a href="/add-pet">Add New Pet</a> | 
+    <a href="/users">Manage Users</a> | 
+    <a href="/pets">Manage Pets</a>
+</body>
+</html>

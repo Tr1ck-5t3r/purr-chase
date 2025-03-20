@@ -1,0 +1,25 @@
+<h2>Add New Pet</h2>
+
+<!-- Form for Adding a Pet -->
+<form action="/add-pet" method="POST" enctype="multipart/form-data">
+  <input type="text" name="name" placeholder="Pet Name" required>
+  <input type="text" name="breed" placeholder="Breed" required>
+
+  <select name="species" required>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="bird">Bird</option>
+    <option value="reptile">Reptile</option>
+    <option value="fish">Fish</option>
+    <option value="other">Other</option>
+  </select>
+
+  <input type="number" name="age" placeholder="Age" required>
+  <input type="number" name="price" placeholder="Price" required>
+  <textarea name="description" placeholder="Description"></textarea>
+
+  <!-- Image Upload -->
+  <input type="file" name="image" accept="image/*" required>
+
+  <button type="submit">Add Pet</button>
+</form>
