@@ -5,7 +5,13 @@ import { Link } from 'react-router-dom'
 import gallery from '../Assets/gallery.png'
 import learn from '../Assets/learn.png'
 import help from '../Assets/help.png'
+import useAuth from '../hooks/useAuth'
+
 function Home() {
+    const { user } = useAuth();
+
+    console.log(user);
+
   return (
     <div>
         <div className=' bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 '>
@@ -131,12 +137,6 @@ function Home() {
                 </div >
             </div>
         </div>
-        {/* <div className=' text-white bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 flex justify-center '>
-            resister rescued pets
-            <div className=' m-6 flex justify-evenly w-10/12 backdrop-blur-sm bg-slate-400 rounded-3xl bg-opacity-10 '>
-            
-            </div>
-        </div> */}
     </div>
   )
 }

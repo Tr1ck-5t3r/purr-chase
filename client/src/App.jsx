@@ -9,24 +9,24 @@ import Gallery from './Components/Gallery';
 import Footer from './Components/Footer';
 import Dashboard from './Components/Dashboard';
 import Activity from './Components/Activity';
+import Login from './Components/Login';
+import Register from './Components/Register';
 import Current from './Components/Current';
 import Editprofile from './Components/Editprofile';
-import {useUser } from '@clerk/clerk-react'
-import { useState } from 'react';
-import { AppContext } from './Context/AppContext'
+
 
 function App() {
-  const { isSignedIn, user } = useUser();
-  const [authState, setAuthState]  = useState(false);
   return (
     <div className="App">
       <div>
-        <Navbar />
+        <Navbar/>
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/find" element={<Find />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/activity" element={<Activity />} />
@@ -35,7 +35,7 @@ function App() {
         <Route path="" element={<Error />} />
       </Routes>
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

@@ -1,193 +1,245 @@
 import { useEffect, useState } from "react";
-import ImageCloud from "./ImageCloud";
-
-const petData = {
-    "pets": [
-      {
-        "name": "Bella",
-        "src": "articleimg_qt6wwb.png",
-        "description": "Bella is a friendly and playful dog who loves long walks and belly rubs.",
-        "type": "dog",
-        "breed": "Labrador Retriever",
-        "age": 3,
-        "gender": "female",
-        "color": "yellow"
-      },
-      {
-        "name": "Max",
-        "src": "articleimg_qt6wwb.png",
-        "description": "Max is a calm and gentle cat who enjoys lounging in sunny spots and being brushed.",
-        "type": "cat",
-        "breed": "Domestic Shorthair",
-        "age": 5,
-        "gender": "male",
-        "color": "tabby"
-      },
-      {
-        "name": "Charlie",
-        "src": "articleimg_qt6wwb.png",
-        "description": "Charlie is an energetic and affectionate puppy who loves to play fetch and cuddle.",
-        "type": "dog",
-        "breed": "Golden Retriever",
-        "age": 1,
-        "gender": "male",
-        "color": "golden"
-      },
-      {
-        "name": "Luna",
-        "src": "articleimg_qt6wwb.png",
-        "description": "Luna is a curious and independent cat who enjoys exploring her surroundings and lounging in high places.",
-        "type": "cat",
-        "breed": "Siamese",
-        "age": 2,
-        "gender": "female",
-        "color": "seal point"
-      },
-      {
-        "name": "Rocky",
-        "src": "articleimg_qt6wwb.png",
-        "description": "Rocky is a loyal and protective dog who loves going for hikes and playing fetch.",
-        "type": "dog",
-        "breed": "German Shepherd",
-        "age": 4,
-        "gender": "male",
-        "color": "black and tan"
-      },
-      {
-        "name": "Milo",
-        "src": "articleimg_qt6wwb.png",
-        "description": "Milo is a sweet and affectionate cat who enjoys cuddling on laps and chasing laser pointers.",
-        "type": "cat",
-        "breed": "Maine Coon",
-        "age": 6,
-        "gender": "male",
-        "color": "brown tabby"
-      },
-      {
-        "name": "Daisy",
-        "src": "articleimg_qt6wwb.png",
-        "description": "Daisy is a playful and curious puppy who loves meeting new people and exploring the outdoors.",
-        "type": "dog",
-        "breed": "Labradoodle",
-        "age": 1,
-        "gender": "female",
-        "color": "cream"
-      },
-      {
-        "name": "Simba",
-        "src": "articleimg_qt6wwb.png",
-        "description": "Simba is a regal and independent cat who enjoys lounging in sunbeams and watching birds from the window.",
-        "type": "cat",
-        "breed": "Persian",
-        "age": 3,
-        "gender": "male",
-        "color": "white"
-      }
-    ]
-  };
-
-function getAllAttributes(data) {
-  const attributes = {
-    name: new Set(),
-    type: new Set(),
-    breed: new Set(),
-    age: new Set(),
-    gender: new Set(),
-    color: new Set(),
-  };
-
-  data.forEach(pet => {
-    Object.keys(attributes).forEach(key => {
-      attributes[key].add(pet[key]);
-    });
-  });
-
-  return attributes;
-}
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from "@cloudinary/react";
+import { auto } from "@cloudinary/url-gen/actions/resize";
+import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
 function Find() {
-  
-  const [distinct, setdistinct] = useState(null);
+  const [pets, setPets] = useState([]);
+  const [filteredPets, setFilteredPets] = useState([]);
+  const [filters, setFilters] = useState({
+    species: "",
+    breed: "",
+    age: "",
+    price: "",
+  });
+
+  const [distinct, setDistinct] = useState({
+    species: new Set(),
+    breed: new Set(),
+    age: new Set(),
+    prices: new Set(),
+  });
+
+  // Initialize Cloudinary
+  const cld = new Cloudinary({
+    cloud: { cloudName: "dgz60odkx" }, // Replace with your Cloudinary cloud name
+  });
+
+  // Fetch pet data from API
   useEffect(() => {
-    console.log(petData["pets"]);
-    setdistinct(getAllAttributes(petData["pets"]));
-    console.log(distinct)
-  }, [petData]);
-  
+    async function fetchPets() {
+      try {
+        const response = await fetch("http://localhost:5000/find"); // Adjust API route if needed
+        const data = await response.json();
+        setPets(data);
+        setFilteredPets(data);
+
+        // Extract unique attributes for filtering
+        const attributes = {
+          species: new Set(),
+          breed: new Set(),
+          age: new Set(),
+          prices: new Set(),
+        };
+
+        data.forEach((pet) => {
+          attributes.species.add(pet.species);
+          attributes.breed.add(pet.breed);
+          attributes.age.add(pet.age);
+          attributes.prices.add(pet.price);
+        });
+
+        setDistinct(attributes);
+      } catch (error) {
+        console.error("Error fetching pets:", error);
+      }
+    }
+
+    fetchPets();
+  }, []);
+
+  // Filter function
+  useEffect(() => {
+    let filtered = pets;
+
+    if (filters.species) {
+      filtered = filtered.filter((pet) => pet.species === filters.species);
+    }
+    if (filters.breed) {
+      filtered = filtered.filter((pet) => pet.breed === filters.breed);
+    }
+    if (filters.age) {
+      filtered = filtered.filter((pet) => pet.age.toString() === filters.age);
+    }
+    if (filters.price) {
+      filtered = filtered.filter((pet) => pet.price <= Number(filters.price));
+    }
+
+    setFilteredPets(filtered);
+  }, [filters, pets]);
+
+  // Handle filter changes
+  const handleFilterChange = (e) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
-    <div className="text-slate-300 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 flex-col justify-center align-middle ">
+    <div className="text-slate-300 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 flex flex-col justify-center items-center">
+      {/* Filter Section */}
       <div className="my-8 p-7 w-11/12 rounded-xl bg-zinc-900">
-        <h2 className='font-medium font-MavenPro text-3xl  '>
-          Lets find your 
+        <h2 className="font-medium font-MavenPro text-3xl text-center">
+          Lets find your{" "}
           <span className="mx-2 hover:cursor-pointer bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size]">
             Purrfect
-          </span>
-          Partners
+          </span>{" "}
+          Partner
         </h2>
-        <form className="p-4 flex mt-10 flex-col items-center justify-center rounded-xl">
-          <div className="flex justify-between w-4/5 gap-10">
-            <label htmlFor="type" className="text-slate-300 font-bold mb-2">Type:</label>
-            <select id="type" className="w-full bg-white border border-gray-300 rounded-md py-2 px-4 mb-3">
-              <option value="">Select Type</option>
-              {/* Add more options dynamically if needed */}
-            </select>
 
-            <label htmlFor="breed" className="text-slate-300 font-bold mb-2">Breed:</label>
-            <select id="breed" className="w-full bg-white border border-gray-300 rounded-md py-2 px-4 mb-3">
-              <option value="">Select Breed</option>
-              {/* Add more options dynamically if needed */}
-            </select>
-          </div>
-          <br/>
-          <div className="flex justify-between w-4/5 gap-10">
-          <label htmlFor="age" className="text-slate-300 font-bold mb-2">Age:</label>
-          <select id="age" className="w-full bg-white border border-gray-300 rounded-md py-2 px-4 mb-3">
-            <option value="">Select Age</option>
-            {/* Add more options dynamically if needed */}
-          </select>
-
-          <label htmlFor="gender" className="text-slate-300 font-bold mb-2">Gender:</label>
-          <select id="gender" className="w-full bg-white border border-gray-300 rounded-md py-2 px-4 mb-3">
-            <option value="">Select Gender</option>
-            {/* Add more options dynamically if needed */}
-          </select>
-          </div>
-          <br/>
-          <div className="flex justify-between w-2/5 gap-10">
-          <label htmlFor="color" className="text-slate-300 font-bold mb-2">Color:</label>
-          <select id="color" className="w-full bg-white border border-gray-300 rounded-md py-2 px-4 mb-3">
-            <option value="">Select Color</option>
-            {/* Add more options dynamically if needed */}
-          </select>
-          </div>
-          <br/>
-          <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">Submit</button>
-        </form>
-
-      </div>
-      <div className='my-10 w-11/12 px-6 py-16 '>
-          <div className="px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-              {petData["pets"].map((image, index) => (
-                <div className="group" key={index}>
-                  <div className="bg-zinc-800 bg-opacity-30 shadow-lg rounded-xl hover:bg-zinc-700 hover:bg-opacity-55">
-                    <div className="h-40 bg-contain">
-                      <ImageCloud src={image.src}/>
-                    </div>
-                    <div className="px-6 py-4">
-                      <h3 className="text-xl font-semibold text-white mb-2">Gallery Title</h3>
-                      <p className="text-gray-500 text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies efficitur lacus.</p>
-                    </div>
-                    <button className="block w-full py-2 px-4 bg-orange-600 text-white text-center hover:bg-rose-500 rounded-b-xl">Buy</button>
-                  </div>
-                </div>
-              ))}
+        <form className="p-4 flex flex-col items-center justify-center rounded-xl text-slate-800">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+            {/* Species Filter */}
+            <div>
+              <label htmlFor="species" className="text-slate-300 font-bold">
+                Species:
+              </label>
+              <select
+                id="species"
+                name="species"
+                className="w-full bg-white border border-gray-300 rounded-md py-2 px-4"
+                value={filters.species}
+                onChange={handleFilterChange}
+              >
+                <option value="">Select Species</option>
+                {[...distinct.species].map((species, index) => (
+                  <option key={index} value={species}>
+                    {species}
+                  </option>
+                ))}
+              </select>
             </div>
 
+            {/* Breed Filter */}
+            <div>
+              <label htmlFor="breed" className="text-slate-300 font-bold">
+                Breed:
+              </label>
+              <select
+                id="breed"
+                name="breed"
+                className="w-full bg-white border border-gray-300 rounded-md py-2 px-4"
+                value={filters.breed}
+                onChange={handleFilterChange}
+              >
+                <option value="">Select Breed</option>
+                {[...distinct.breed].map((breed, index) => (
+                  <option key={index} value={breed}>
+                    {breed}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Age Filter */}
+            <div>
+              <label htmlFor="age" className="text-slate-300 font-bold">
+                Age:
+              </label>
+              <select
+                id="age"
+                name="age"
+                className="w-full bg-white border border-gray-300 rounded-md py-2 px-4"
+                value={filters.age}
+                onChange={handleFilterChange}
+              >
+                <option value="">Select Age</option>
+                {[...distinct.age].map((age, index) => (
+                  <option key={index} value={age}>
+                    {age}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Price Filter */}
+            <div>
+              <label htmlFor="price" className="text-slate-300 font-bold">
+                Price Range:
+              </label>
+              <select
+                id="price"
+                name="price"
+                className="w-full bg-white border border-gray-300 rounded-md py-2 px-4"
+                value={filters.price}
+                onChange={handleFilterChange}
+              >
+                <option value="">Select Price Range</option>
+                {[...distinct.prices]
+                  .sort((a, b) => a - b)
+                  .map((price, index) => (
+                    <option key={index} value={price}>
+                      Up to ${price.toLocaleString()}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      {/* Pets Display Section */}
+      <div className="my-10 w-11/12 px-6 py-16">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+            {filteredPets.length > 0 ? (
+              filteredPets.map((pet, index) => {
+                if (!pet.images || pet.images.length === 0) return null;
+
+                const petImg = cld
+                  .image(pet.images[0])
+                  .resize(auto().gravity(autoGravity()).width(200).height(200))
+                  .format("auto")
+                  .quality("auto");
+
+                return (
+                  <div className="group" key={index}>
+                    <div className="bg-zinc-800 bg-opacity-30 shadow-lg rounded-xl overflow-hidden hover:bg-zinc-700 hover:bg-opacity-55">
+                      {/* Image Container */}
+                      <div className="h-50 w-full flex justify-center items-center overflow-hidden">
+                        <AdvancedImage
+                          cldImg={petImg}
+                          className="h-full w-full object-cover rounded-t-xl"
+                          alt={pet.name}
+                        />
+                      </div>
+                      {/* Pet Info */}
+                      <div className="px-6 py-4">
+                        <h3 className="text-xl font-semibold text-white mb-2">
+                          {pet.name}
+                        </h3>
+                        <p className="text-gray-500 text-base">
+                          {pet.description}
+                        </p>
+                      </div>
+                      {/* Buy Button */}
+                      <button className="block w-full py-2 px-4 bg-orange-600 text-white text-center hover:bg-rose-500 rounded-b-xl">
+                        Buy for ${pet.price.toLocaleString()}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-center text-gray-400">No pets found.</p>
+            )}
           </div>
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Find
+export default Find;

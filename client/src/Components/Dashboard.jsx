@@ -5,6 +5,7 @@ import articleimgfour from '../Assets/articleimgfour.png'
 import pawpatterntwoc from '../Assets/pawpatterntwoc.png'
 import pawpatterntwo from '../Assets/pawpatterntwo.png'
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const petData = {
     "pets": [
@@ -92,6 +93,10 @@ const petData = {
 };
 
 function Dashboard() {
+
+    const { user } = useAuth();
+    console.log(user);
+    
   return (
     <div className="text-slate-300 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900 via-[#0d0d0d] to-zinc-900 px-10 py-8 flex justify-center align-middle  ">
         <div className="w-10/12">
@@ -110,28 +115,20 @@ function Dashboard() {
                             <div className='pt-3 pl-8'>
                                 <h2 className=' font-medium font-MavenPro text-3xl '>
                                     <span className=" hover:cursor-pointer bg-gradient-to-r from-rose-500 to-orange-500 bg-no-repeat bg-bottom bg-[length:100%_6px] hover:bg-[length:100%_100%] transition-[background-size]">
-                                        Hello User
+                                        Hello {user.username}!
                                     </span>
                                 </h2>
                                 <div className=' text-justify my-7 pr-16 '>
                                     <p>
-                                        Name: User
-                                    </p>
-                                    <br />
-                                    <p>
-                                        About: User is a user. They have control over their profile and can edit it as they wish.
+                                        Email: {user.email}
                                     </p>
                                     <br/>
                                     <p>
-                                        Email: user@user.com
-                                    </p>
-                                    <br/>
-                                    <p>
-                                        Phone: 1234567890
+                                        Phone: {user.phone}
                                     </p>
                                     <br />
                                     <p>
-                                        Address: 123, User Street, User City
+                                        Address: {user.address}
                                     </p>
                                     <br />        
                                 </div>
